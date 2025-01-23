@@ -10,9 +10,6 @@ class CreateTransactionsTable(Migration):
         """
         with self.schema.create("transactions") as table:
             table.uuid("uuid").primary()
-            table.uuid("account_id").foreign("account_id").references("uuid").on(
-                "accounts"
-            )
             table.decimal("amount", 17, 2).default(0.0)
             table.text("description", length=255, nullable=True)
             table.uuid("from_id").foreign("from_id").references("uuid").on("wallets")

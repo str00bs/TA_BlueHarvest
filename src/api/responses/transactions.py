@@ -1,6 +1,5 @@
 """File contains responses for the '/transactions' endpoint router"""
 
-
 from fastapi import status
 
 from api.schema.transactions import TransactionsList, TransactionsSchema

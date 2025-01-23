@@ -3,7 +3,8 @@
 from logging import getLogger
 from uuid import UUID
 
-from fastapi import APIRouter, BackgroundTasks, Depends, Path, Query, Security, status
+from fastapi import (APIRouter, BackgroundTasks, Depends, Path, Query,
+                     Security, status)
 from fastapi.responses import Response
 
 from api.auth import Auth

@@ -7,14 +7,9 @@ from fastapi import status
 from fastapi.exceptions import HTTPException
 from masoniteorm.exceptions import QueryException
 
-from api.schema import (
-    AccountsList,
-    AccountsSchema,
-    OverviewSchema,
-    TransactionsSchema,
-    WalletsSchema,
-)
-from databases.models import AccountsModel
+from api.schema import (AccountsList, AccountsSchema, OverviewSchema,
+                        TransactionsSchema, WalletsSchema)
+from databases.models import AccountsModel, TransactionsModel
 
 logger = getLogger(__name__)
 
@@ -28,22 +23,25 @@ class AccountsService:
     def overview(self, uuid: str) -> OverviewSchema:
         """Registers a new `Account` Entity from data"""
         account = AccountsModel.find(uuid)
+        if not account:
+            raise HTTPException(status.HTTP_404_NOT_FOUND)
 
-        try:
-            wallets = [
-                WalletsSchema(**wallet) for wallet in account.wallets.serialize()
-            ]
-        except AttributeError as ex:
-            logger.warning(ex)
-            raise HTTPException(404, detail="Wallets not found")
         try:
             transactions = [
                 TransactionsSchema(**transaction)
-                for transaction in account.transactions.serialize()
+                for transaction in TransactionsModel.where_in(
+                    "from_id", account.wallets.pluck("uuid")
+                )
+                .get()
+                .serialize()
             ]
+            wallets = [
+                WalletsSchema(**wallet) for wallet in account.wallets.serialize()
+            ]
+
         except AttributeError as ex:
             logger.warning(ex)
-            raise HTTPException(404, detail="Transactions not found")
+            raise HTTPException(404, detail="Wallets not found")
 
         overview = OverviewSchema(
             account=AccountsSchema(**account.serialize()),

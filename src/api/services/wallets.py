@@ -1,6 +1,7 @@
 """File contains the WalletsService class."""
 
 from logging import getLogger
+from uuid import uuid4
 
 from fastapi import status
 from fastapi.exceptions import HTTPException
@@ -20,11 +21,14 @@ class WalletsService:
 
     def create(self, data: WalletsSchema):
         """Creates a `WalletsSchema` Entity from data"""
-        # ? Check if account for wallet exists
         if not AccountsModel.find(data.account_id):
             account = AccountsModel.create(
-                {"uuid": data.account_id, "is_anonymous": True}
+                {"uuid": uuid4(), "is_anonymous": True, "initial_balance": data.balance}
             ).fresh()
+            wallet = account.wallets.first()
+
+            logger.debug(f"Created account {account.uuid} for wallet {wallet.uuid}")
+            return WalletsSchema(**wallet.serialize())  # ? New account only has 1
 
         try:
             wallets = WalletsModel.create(data.model_dump()).fresh()

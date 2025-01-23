@@ -20,7 +20,6 @@ class WalletsObserver:
             TransactionsModel.create(
                 {
                     "uuid": uuid4(),
-                    "account_id": wallet.account_id,
                     "from_id": wallet.uuid,
                     "to_id": wallet.uuid,
                     "amount": wallet.balance,

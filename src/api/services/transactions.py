@@ -5,7 +5,6 @@ from uuid import UUID
 
 from fastapi import status
 from fastapi.exceptions import HTTPException
-from masoniteorm.exceptions import QueryException
 
 from api.schema import TransactionsList, TransactionsSchema
 from databases.models import AccountsModel, TransactionsModel, WalletsModel
@@ -21,16 +20,29 @@ class TransactionsService:
 
     def create(self, data: TransactionsSchema):
         """Creates a `TransactionsSchema` Entity from data"""
-        try:
-            transactions = TransactionsModel.create(data.model_dump()).fresh()
-            WalletsModel.find(data.wallet_id).update({"balance": data.amount})
 
-        except QueryException as e:
-            logger.warning(e)
+        sender = WalletsModel.find(data.from_id)
+        receiver = WalletsModel.find(data.to_id)
+        if sender is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Sender (from) wallet not found",
+            )
+        if receiver is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Receiver (to) wallet not found",
+            )
+        if sender.balance < data.amount:
             raise HTTPException(
                 status_code=409,
-                detail="Transactions already exists",
+                detail="Insufficient funds",
             )
+
+        sender.update({"balance": sender.balance - data.amount})
+        receiver.update({"balance": receiver.balance + data.amount})
+        transactions = TransactionsModel.create(data.model_dump()).fresh()
+
         return TransactionsSchema(**transactions.serialize())
 
     def retrieve(self, uuid: str) -> TransactionsSchema:
@@ -55,7 +67,8 @@ class TransactionsService:
             account = AccountsModel.find(account_id)
             if not account:
                 raise HTTPException(status.HTTP_404_NOT_FOUND)
-            return TransactionsList(data=account.transactions, meta=None)
+
+            return TransactionsList(data=account.get_transactions(), meta=None)
         elif wallet_id:
             wallet = WalletsModel.find(wallet_id)
             if not wallet:
