@@ -22,7 +22,7 @@ router = APIRouter(
 
 # ? Router CRUD Endpoints
 @router.options(
-    path="/wallets",
+    path="/",
     operation_id="api.wallets.options",
     responses=WalletsResponses.options,
 )
@@ -34,7 +34,7 @@ async def wallets_options(service=Depends(WalletsService)):
 
 
 @router.post(
-    path="/wallets",
+    path="/",
     operation_id="api.wallets.create",
     responses=WalletsResponses.create,
     status_code=201,
@@ -50,7 +50,7 @@ async def create_wallet(
 
 
 @router.get(
-    path="/wallets",
+    path="/",
     operation_id="api.wallets.listed",
     responses=WalletsResponses.listed,
 )
@@ -67,7 +67,7 @@ async def retrieve_wallets_list(
 
 
 @router.get(
-    path="/wallets/{uuid}",
+    path="/{uuid}",
     operation_id="api.wallets.retrieve",
     responses=WalletsResponses.retrieve,
 )
@@ -85,7 +85,7 @@ async def retrieve_wallet(
 
 
 @router.delete(
-    path="/wallets/{uuid}",
+    path="/{uuid}",
     operation_id="api.wallets.delete",
     responses=WalletsResponses.delete,
     status_code=204,
