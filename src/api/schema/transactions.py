@@ -21,9 +21,6 @@ class TransactionsSchema(BaseModel):
     description: Optional[str] = Field(
         None, description="Description of the transaction"
     )
-    account_id: UUID = Field(
-        description="Which account the transaction belongs to", default_factory=uuid4
-    )
     from_id: UUID = Field(
         description="Which wallet sends the transaction", default_factory=uuid4
     )
