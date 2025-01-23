@@ -29,7 +29,11 @@ class AccountsService:
         try:
             transactions = [
                 TransactionsSchema(**transaction)
-                for transaction in TransactionsModel.where_in("from_id", account.wallets.pluck("uuid")).get().serialize()
+                for transaction in TransactionsModel.where_in(
+                    "from_id", account.wallets.pluck("uuid")
+                )
+                .get()
+                .serialize()
             ]
             wallets = [
                 WalletsSchema(**wallet) for wallet in account.wallets.serialize()

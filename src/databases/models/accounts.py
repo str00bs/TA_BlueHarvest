@@ -33,6 +33,7 @@ class AccountsModel(Model, UUIDPrimaryKeyMixin, SoftDeletesMixin):
 
     def get_transactions(self):
         from databases.models.transactions import TransactionsModel
+
         return TransactionsModel.where_in("from_id", self.wallets.pluck("uuid")).get()
 
 

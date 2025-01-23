@@ -5,7 +5,6 @@ from uuid import UUID
 
 from fastapi import status
 from fastapi.exceptions import HTTPException
-from masoniteorm.exceptions import QueryException
 
 from api.schema import TransactionsList, TransactionsSchema
 from databases.models import AccountsModel, TransactionsModel, WalletsModel

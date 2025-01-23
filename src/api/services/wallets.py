@@ -2,6 +2,7 @@
 
 from logging import getLogger
 from uuid import uuid4
+
 from fastapi import status
 from fastapi.exceptions import HTTPException
 from masoniteorm.exceptions import QueryException
@@ -21,11 +22,9 @@ class WalletsService:
     def create(self, data: WalletsSchema):
         """Creates a `WalletsSchema` Entity from data"""
         if not AccountsModel.find(data.account_id):
-            account = AccountsModel.create({
-                "uuid": uuid4(),
-                "is_anonymous": True,
-                "initial_balance": data.balance
-            }).fresh()
+            account = AccountsModel.create(
+                {"uuid": uuid4(), "is_anonymous": True, "initial_balance": data.balance}
+            ).fresh()
             wallet = account.wallets.first()
 
             logger.debug(f"Created account {account.uuid} for wallet {wallet.uuid}")
