@@ -102,8 +102,11 @@ class AccountsService:
         if not account:
             raise HTTPException(status.HTTP_404_NOT_FOUND)
 
-        self.delete(uuid)
-        return self.create(data)
+        try:
+            self.delete(uuid)
+            return self.create(data)
+        except AttributeError:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST)
 
     def delete(self, uuid: str) -> None:
         """Delete a `AccountsSchema` Entity by uuid"""
