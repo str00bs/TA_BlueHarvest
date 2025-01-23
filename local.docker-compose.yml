@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    command: sh /app/entrypoint.sh
+    restart: unless-stopped
+    ports: 
+      - "80:80"
+    depends_on:
+      - database
+
+  database:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"

@@ -3,7 +3,8 @@ Implementation for the technical assignment from BlueHarvest
 
 ## Notes
 A few notable things have been omitted as it's not specified by the assignment:
-- Wallet <-> Transaction logic (i.e. Transfer of funds, no-overdrafting, is funds available?)
+- Better differentiation of expected payload / example payload / return payload
+  - Cut for time :)
 - Polymorphic relationships (i.e. so you can do account.wallets.transactions)
   - Eager-loading of account.wallets and account.transactions
 - A bunch of error details, though some have been added for display purposes.
@@ -11,7 +12,7 @@ A few notable things have been omitted as it's not specified by the assignment:
 
 ## Setup
 Run:
-1. Copy ENV: `cp dist.env .env`
+1. Copy ENV: `cp dist.env .env` and `cp local.docker-compose.yml docker-compose.yml` 
 2. Run docker: `docker-compose up -d`
 3. Open `0.0.0.0:80` in a web-browser
 
