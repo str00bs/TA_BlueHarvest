@@ -1,23 +1,22 @@
-"""File contains responses for the '/users' endpoint router"""
-from typing import List
+"""File contains responses for the '/accounts' endpoint router"""
 
 from fastapi import status
 
-from api.schema.users import UsersSchema, UsersList
+from api.schema.accounts import AccountsList, AccountsSchema, OverviewSchema
 
 from .generic import GenericResponses
 
 
-class UsersResponses:
-    """Class contains users responses"""
+class AccountsResponses:
+    """Class contains accounts responses"""
 
     options = {
         status.HTTP_200_OK: {
             "content": None,
-            "description": "Users router options successfully retrieved",
+            "description": "Accounts router options successfully retrieved",
             "headers": {
                 "allow": {
-                    "description": "Allowed methods for the Users router",
+                    "description": "Allowed methods for the Accounts router",
                     "type": "List[string]",
                 }
             },
@@ -27,10 +26,48 @@ class UsersResponses:
         **GenericResponses.server_error,
     }
 
+    overview = {
+        status.HTTP_200_OK: {
+            "model": OverviewSchema,
+            "description": "Account overview successfully retrieved",
+            "headers": {
+                "content-length": {
+                    "description": "Content Length",
+                    "type": "int",
+                },
+                "date": {"description": "Response Date", "type": "Datetime"},
+                "server": {"description": "API Server", "type": "string"},
+            },
+        },
+        **GenericResponses.unauthorized,
+        **GenericResponses.not_found,
+        **GenericResponses.server_error,
+    }
+
+    # ? CRUD responses
+    create = {
+        status.HTTP_201_CREATED: {
+            "model": AccountsSchema,
+            "description": "Accounts successfully created",
+            "headers": {
+                "content-length": {
+                    "description": "Content Length",
+                    "type": "int",
+                },
+                "date": {"description": "Response Date", "type": "Datetime"},
+                "server": {"description": "API Server", "type": "string"},
+            },
+        },
+        **GenericResponses.unauthorized,
+        **GenericResponses.not_found,
+        **GenericResponses.server_error,
+        **GenericResponses.conflict,
+    }
+
     retrieve = {
         status.HTTP_200_OK: {
-            "model": UsersSchema,
-            "description": "Users successfully retrieved",
+            "model": AccountsSchema,
+            "description": "Accounts successfully retrieved",
             "headers": {
                 "content-length": {
                     "description": "Content Length",
@@ -47,8 +84,8 @@ class UsersResponses:
 
     listed = {
         status.HTTP_200_OK: {
-            "model": UsersList,
-            "description": "UsersList successfully retrieved",
+            "model": AccountsList,
+            "description": "AccountsList successfully retrieved",
             "headers": {
                 "content-length": {
                     "description": "Content Length",
@@ -61,31 +98,12 @@ class UsersResponses:
         **GenericResponses.unauthorized,
         **GenericResponses.not_found,
         **GenericResponses.server_error,
-    }
-
-    create = {
-        status.HTTP_201_CREATED: {
-            "model": UsersSchema,
-            "description": "Users successfully created",
-            "headers": {
-                "content-length": {
-                    "description": "Content Length",
-                    "type": "int",
-                },
-                "date": {"description": "Response Date", "type": "Datetime"},
-                "server": {"description": "API Server", "type": "string"},
-            },
-        },
-        **GenericResponses.unauthorized,
-        **GenericResponses.not_found,
-        **GenericResponses.server_error,
-        **GenericResponses.conflict
     }
 
     update = {
         status.HTTP_200_OK: {
-            "model": UsersSchema,
-            "description": "Users successfully updated",
+            "model": AccountsSchema,
+            "description": "Accounts successfully updated",
             "headers": {
                 "content-length": {
                     "description": "Content Length",
@@ -102,8 +120,8 @@ class UsersResponses:
 
     replace = {
         status.HTTP_200_OK: {
-            "model": UsersSchema,
-            "description": "Users successfully replaced",
+            "model": AccountsSchema,
+            "description": "Accounts successfully replaced",
             "headers": {
                 "content-length": {
                     "description": "Content Length",
@@ -121,7 +139,7 @@ class UsersResponses:
     delete = {
         status.HTTP_204_NO_CONTENT: {
             "content": None,
-            "description": "Users successfully deleted",
+            "description": "Accounts successfully deleted",
             "headers": {
                 "content-length": {
                     "description": "Content Length",

@@ -1,6 +1,7 @@
 """
 Main Application Module
 """
+
 from config import Config
 
 __title__ = Config.Api.title

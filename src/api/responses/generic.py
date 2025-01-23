@@ -1,4 +1,5 @@
 """File contains generic and shared responses"""
+
 from typing import List
 
 from fastapi import status

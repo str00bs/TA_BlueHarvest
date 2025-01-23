@@ -1,8 +1,9 @@
 """
 File contains DATABASE configurations
 """
+
 from pathlib import Path
-from typing import Union, Optional
+from typing import Optional, Union
 
 from masoniteorm.connections import ConnectionResolver
 from pydantic import Field, root_validator
@@ -33,7 +34,7 @@ class Database(BaseSettings):
         env_prefix="DB_",
         env_file_encoding="utf-8",
         case_sensitive=False,
-        extra="ignore"
+        extra="ignore",
     )
 
 

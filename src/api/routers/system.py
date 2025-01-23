@@ -1,4 +1,5 @@
 """File contains system endpoint router and template controller"""
+
 from logging import getLogger
 
 from fastapi import APIRouter, Request

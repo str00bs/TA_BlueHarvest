@@ -1,23 +1,22 @@
-"""File contains responses for the '/preferences' endpoint router"""
-from typing import List
+"""File contains responses for the '/wallets' endpoint router"""
 
 from fastapi import status
 
-from api.schema.preferences import PreferencesSchema, PreferencesList
+from api.schema.wallets import WalletsList, WalletsSchema
 
 from .generic import GenericResponses
 
 
-class PreferencesResponses:
-    """Class contains preferences responses"""
+class WalletsResponses:
+    """Class contains wallets responses"""
 
     options = {
         status.HTTP_200_OK: {
             "content": None,
-            "description": "Preferences router options successfully retrieved",
+            "description": "Wallets router options successfully retrieved",
             "headers": {
                 "allow": {
-                    "description": "Allowed methods for the Preferences router",
+                    "description": "Allowed methods for the Wallets router",
                     "type": "List[string]",
                 }
             },
@@ -29,8 +28,8 @@ class PreferencesResponses:
 
     retrieve = {
         status.HTTP_200_OK: {
-            "model": PreferencesSchema,
-            "description": "Preferences successfully retrieved",
+            "model": WalletsSchema,
+            "description": "Wallets successfully retrieved",
             "headers": {
                 "content-length": {
                     "description": "Content Length",
@@ -47,8 +46,8 @@ class PreferencesResponses:
 
     listed = {
         status.HTTP_200_OK: {
-            "model": PreferencesList,
-            "description": "PreferencesList successfully retrieved",
+            "model": WalletsList,
+            "description": "WalletsList successfully retrieved",
             "headers": {
                 "content-length": {
                     "description": "Content Length",
@@ -65,8 +64,8 @@ class PreferencesResponses:
 
     create = {
         status.HTTP_201_CREATED: {
-            "model": PreferencesSchema,
-            "description": "Preferences successfully created",
+            "model": WalletsSchema,
+            "description": "Wallets successfully created",
             "headers": {
                 "content-length": {
                     "description": "Content Length",
@@ -79,49 +78,13 @@ class PreferencesResponses:
         **GenericResponses.unauthorized,
         **GenericResponses.not_found,
         **GenericResponses.server_error,
-        **GenericResponses.conflict
-    }
-
-    update = {
-        status.HTTP_200_OK: {
-            "model": PreferencesSchema,
-            "description": "Preferences successfully updated",
-            "headers": {
-                "content-length": {
-                    "description": "Content Length",
-                    "type": "int",
-                },
-                "date": {"description": "Response Date", "type": "Datetime"},
-                "server": {"description": "API Server", "type": "string"},
-            },
-        },
-        **GenericResponses.unauthorized,
-        **GenericResponses.not_found,
-        **GenericResponses.server_error,
-    }
-
-    replace = {
-        status.HTTP_200_OK: {
-            "model": PreferencesSchema,
-            "description": "Preferences successfully replaced",
-            "headers": {
-                "content-length": {
-                    "description": "Content Length",
-                    "type": "int",
-                },
-                "date": {"description": "Response Date", "type": "Datetime"},
-                "server": {"description": "API Server", "type": "string"},
-            },
-        },
-        **GenericResponses.unauthorized,
-        **GenericResponses.not_found,
-        **GenericResponses.server_error,
+        **GenericResponses.conflict,
     }
 
     delete = {
         status.HTTP_204_NO_CONTENT: {
             "content": None,
-            "description": "Preferences successfully deleted",
+            "description": "Wallets successfully deleted",
             "headers": {
                 "content-length": {
                     "description": "Content Length",

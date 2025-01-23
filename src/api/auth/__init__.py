@@ -1,4 +1,5 @@
 """Module contains Auth implementations for the API."""
+
 import secrets
 
 from fastapi import Depends, HTTPException, status

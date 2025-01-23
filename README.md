@@ -1,6 +1,14 @@
 # TA BlueHarvest
 Implementation for the technical assignment from BlueHarvest
 
+## Notes
+A few notable things have been omitted as it's not specified by the assignment:
+- Wallet <-> Transaction logic (i.e. Transfer of funds, no-overdrafting, is funds available?)
+- Polymorphic relationships (i.e. so you can do account.wallets.transactions)
+  - Eager-loading of account.wallets and account.transactions
+- A bunch of error details, though some have been added for display purposes.
+- Regression (unit) tests for all endpoints (Pytest fixtures are not necessary for this)
+
 ## Setup
 Run:
 1. Copy ENV: `cp dist.env .env`
