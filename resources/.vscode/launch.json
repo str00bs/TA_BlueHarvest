@@ -1,0 +1,65 @@
+{
+    "configurations": [
+        {
+            "name": "Run",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src",
+            "python": "${workspaceFolder}/venv/bin/python3",
+            "module": "uvicorn",
+            "args": [
+                "main:app",
+                "--reload",
+                "--port=8000"
+            ]
+        },
+        {
+            "name": "Linting",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src",
+            "python": "${workspaceFolder}/venv/bin/python3",
+            "module": "black",
+            "args": [
+                ".",
+            ]
+        },
+        {
+            "name": "Sort Imports",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src",
+            "python": "${workspaceFolder}/venv/bin/python3",
+            "module": "isort",
+            "args": [
+                ".",
+            ]
+        },
+        {
+            "name": "Unit Tests",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src",
+            "python": "${workspaceFolder}/venv/bin/python3",
+            "module": "pytest",
+            "args": [
+                "tests/",
+                "--verbose",
+                "--capture=tee-sys"
+            ]
+        },
+        {
+            "name": "Coverage",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src",
+            "python": "${workspaceFolder}/venv/bin/python3",
+            "module": "pytest",
+            "args": [
+                "tests/",
+                "--cov-report=term",
+                "--cov=."
+            ]
+        }
+    ]
+}
