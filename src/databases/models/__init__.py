@@ -1,8 +1,11 @@
 """Module contains and loads Database Models"""
-from .users import UsersModel
-from .preferences import PreferencesModel
+
+from .accounts import AccountsModel
+from .transactions import TransactionsModel
+from .wallets import WalletsModel
 
 __all__ = [
-    "UsersModel",
-    "PreferencesModel",
+    "AccountsModel",
+    "WalletsModel",
+    "TransactionsModel",
 ]

@@ -1,6 +1,6 @@
 """File contains responses for the system endpoint router"""
+
 from fastapi import status
-from fastapi.responses import HTMLResponse
 
 from .generic import GenericResponses
 

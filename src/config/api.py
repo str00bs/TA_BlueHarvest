@@ -1,5 +1,7 @@
 """File contains API Config Container"""
+
 from typing import List
+
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -19,7 +21,7 @@ class APIConfig(BaseSettings):
         env_prefix="API_",
         env_file_encoding="utf-8",
         case_sensitive=False,
-        extra="ignore"
+        extra="ignore",
     )
 
 

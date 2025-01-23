@@ -1,8 +1,7 @@
 """Module loads and contains API Services"""
-from .preferences import PreferencesService
-from .users import UsersService
 
-__all__ = [
-    "PreferencesService",
-    "UsersService"
-]
+from .accounts import AccountsService
+from .transactions import TransactionsService
+from .wallets import WalletsService
+
+__all__ = ["WalletsService", "AccountsService", "TransactionsService"]

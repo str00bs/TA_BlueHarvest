@@ -1,6 +1,5 @@
 """Module loads and contains API Tasks"""
-from .users import UsersTasks
 
-__all__ = [
-    "UsersTasks"
-]
+from .accounts import AccountsTasks
+
+__all__ = ["AccountsTasks"]

@@ -1,13 +1,15 @@
 """Module loads and contains API Responses"""
-from .generic import GenericResponses
-from .preferences import PreferencesResponses
-from .system import SystemResponses
-from .users import UsersResponses
 
+from .accounts import AccountsResponses
+from .generic import GenericResponses
+from .system import SystemResponses
+from .transactions import TransactionsResponses
+from .wallets import WalletsResponses
 
 __all__ = [
     "GenericResponses",
-    "PreferencesResponses",
+    "WalletsResponses",
     "SystemResponses",
-    "UsersResponses"
+    "AccountsResponses",
+    "TransactionsResponses",
 ]

@@ -1,13 +1,18 @@
 """Module loads and contains API Schema"""
-from .generic import MetaSchema, MessageSchema
-from .preferences import PreferencesSchema, PreferencesList
-from .users import UsersSchema, UsersList
+
+from .accounts import AccountsList, AccountsSchema, OverviewSchema
+from .generic import MessageSchema, MetaSchema
+from .transactions import TransactionsList, TransactionsSchema
+from .wallets import WalletsList, WalletsSchema
 
 __all__ = [
-    "MetaSchema",
+    "AccountsSchema",
+    "AccountsList",
+    "OverviewSchema",
     "MessageSchema",
-    "PreferencesSchema",
-    "PreferencesList",
-    "UsersSchema",
-    "UsersList"
+    "MetaSchema",
+    "TransactionsList",
+    "TransactionsSchema",
+    "WalletsList",
+    "WalletsSchema",
 ]

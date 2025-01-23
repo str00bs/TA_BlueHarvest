@@ -1,6 +1,7 @@
 """
 File contains tests for the `main.py` application file
 """
+
 from unittest import TestCase
 
 from fastapi.testclient import TestClient

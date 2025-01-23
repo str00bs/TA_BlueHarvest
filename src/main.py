@@ -4,6 +4,7 @@ Main Application file
 Used as target when running the ASGI server
 ex: `uvicorn main:app --reload` from `src/`
 """
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
